@@ -1,8 +1,5 @@
-const url = 'https://api.datamuse.com/words?';
-const queryParams = 'rel_jja=';
-let user = "hello"
-const getSuggestions = async () => {;
-  const endpoint = url + queryParams + user;
+const getSuggestions = async (url = "https://api.datamuse.com/words?", params = "rel_jja=", user = "hello") => {;
+  const endpoint = url + params + user;
   try {
     const response = await fetch(endpoint);
     if(response.ok) {
@@ -14,4 +11,4 @@ const getSuggestions = async () => {;
     console.log(error);
   }
 }
-getSuggestions();
+export { getSuggestions };
