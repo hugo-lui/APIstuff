@@ -1,3 +1,4 @@
+const database = require("./database.js");
 let answers;
 let replace = new Map();
 const user = "This piece of artwork is beautiful";
@@ -20,7 +21,6 @@ const set = async (num, word, params, url) => {
     for(let i = 0; i < num; i++) {
       if(answers.length > i) {
         replace.set(answers[i]["word"], word);
-        counter++;
       }
     }
   }
@@ -37,4 +37,5 @@ const set = async (num, word, params, url) => {
     }
   }
 }
-user.split(" ").forEach(i => set(3, i));
+//user.split(" ").forEach(i => set(3, i));
+database.create();
