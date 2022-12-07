@@ -4,12 +4,33 @@ function create() {
         db.serialize(() => {
         db.run("drop table if exists data");
         db.run("create table data (original text, synonym text)");
-        db.run("insert into data (original, synonym) values('1', 'hello')");
-        db.get("select * from data", (error, row) => {
-            error ? console.log(error) : console.log(row.original);   
-        });
+    });
+}
+function insert(original, synonym) {
+    db.run("insert into data (original, synonym) values ($original, $synonym)",
+    {
+        $original: original,
+        $synonym: synonym
+    }, (error) => {
+        error ? console.log(error) : console.log("Inserted '" + original + "' and '" + synonym + "' into the database");
+    });
+}
+function retrieveAll() {
+    db.all("select * from data", (error, row) => {
+        error ? console.log(error) : console.log(row);
+    });
+}
+function retrieveSome(original) {
+    db.all("select * from data where original = $original",
+    {
+        $original: original
+    }, (error, row) => {
+        error ? console.log(error) : console.log(row);
     });
 }
 module.exports = {
-    create
+    create,
+    insert,
+    retrieveAll,
+    retrieveSome
 }

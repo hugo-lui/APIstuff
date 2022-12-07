@@ -15,7 +15,7 @@ const getSuggestions = async (word = "hello", params = "rel_syn=", url = "https:
     console.log(error);
   }
 }
-const set = async (num, word, params, url) => {
+const setSynonyms = async (num, word, params, url) => {
   answers = await getSuggestions(word, params, url);
   if(answers.length !== 0) {
     for(let i = 0; i < num; i++) {
@@ -33,9 +33,9 @@ const set = async (num, word, params, url) => {
           replace.delete(j);
         }       
       }
-      console.log(out);
+      database.insert(user, out);
     }
   }
 }
-//user.split(" ").forEach(i => set(3, i));
-database.create();
+//user.split(" ").forEach(i => setSynonyms(3, i));
+database.retrieveAll();
