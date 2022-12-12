@@ -28,9 +28,27 @@ function retrieveSome(original) {
         error ? console.log(error) : console.log(row);
     });
 }
+function deleteOriginal(original) {
+    db.run("delete from data where original = $original",
+    {
+        $original: original
+    }, (error) => {
+        error ? console.log(error) : console.log("Deleted '" + original + "' from the database");
+    })
+}
+function deleteSynonym(synonym) {
+    db.run("delete from data where synonym = $synonym",
+    {
+        $synonym: synonym
+    }, (error) => {
+        error ? console.log(error) : console.log("Deleted '" + synonym + "' from the database");
+    })
+}
 module.exports = {
     create,
     insert,
     retrieveAll,
-    retrieveSome
+    retrieveSome,
+    deleteOriginal,
+    deleteSynonym
 }

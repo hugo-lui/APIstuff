@@ -1,7 +1,7 @@
 const database = require("./database.js");
 let answers;
 let replace = new Map();
-const user = "This piece of artwork is beautiful";
+const user = "The world is a very big place";
 const getSuggestions = async (word = "hello", params = "rel_syn=", url = "https://api.datamuse.com/words?") => {
   const endpoint = url + params + word;
   try {
@@ -37,5 +37,5 @@ const setSynonyms = async (num, word, params, url) => {
     }
   }
 }
-//user.split(" ").forEach(i => setSynonyms(3, i));
+user.split(" ").forEach(i => setSynonyms(3, i));
 database.retrieveAll();
