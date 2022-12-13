@@ -1,7 +1,8 @@
 const database = require("./database.js");
 let answers;
 let replace = new Map();
-const user = "The world is a very big place";
+const user = "This piece of art is very beautiful";
+const choice = "create";
 const getSuggestions = async (word = "hello", params = "rel_syn=", url = "https://api.datamuse.com/words?") => {
   const endpoint = url + params + word;
   try {
@@ -33,9 +34,26 @@ const setSynonyms = async (num, word, params, url) => {
           replace.delete(j);
         }       
       }
-      database.insert(user, out);
+      //database.insert(user, out);
+      console.log(out);
     }
   }
 }
-user.split(" ").forEach(i => setSynonyms(3, i));
-database.retrieveAll();
+if(choice === "create") {
+  database.create();
+}
+else if(choice === "insert") {
+  user.split(" ").forEach(i => setSynonyms(3, i));
+}
+else if(choice === "retrieveAll") {
+  database.retrieveAll();
+}
+else if(choice === "retrieveSome") {
+  database.retrieveSome(user);
+}
+else if(choice === "deleteOriginal") {
+  
+}
+else if(choice === "deleteSynonym") {
+  
+}
